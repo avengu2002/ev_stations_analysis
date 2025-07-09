@@ -1,1 +1,2 @@
-# dbt project
+# Initial dbt repo
+
