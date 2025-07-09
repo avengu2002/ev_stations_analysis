@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: raw
+    database: EV_STATIONS_ANALYTICS
+    schema: RAW
+    tables:
+      - name: ev_roam_charging_stations_raw
+        description: Raw ev station data from json file

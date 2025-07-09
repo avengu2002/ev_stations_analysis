@@ -1,0 +1,24 @@
+models:
+  - name: stg_ev_charging_stations__stations
+    description: "Staging model for EV Roam Charging Stations data"
+    columns:
+      - name: charging_station_id
+        description: "Unique identifier for each charging station"
+        tests:
+          - not_null
+          - unique
+      - name: station_name
+      - name: operator_name
+      - name: owner_name
+      - name: station_address
+      - name: is_24_hours_flag
+      - name: car_park_count
+      - name: has_carpark_cost_flag
+      - name: max_time_limit
+      - name: has_tourist_attraction_flag
+      - name: latitude
+      - name: longitude
+      - name: date_first_operational
+      - name: station_status
+      - name: connectors_json
+      - name: has_charging_cost_flag

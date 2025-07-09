@@ -1,0 +1,28 @@
+version: 2
+
+models:
+  - name: dim_ev_vehicle
+    description: "Dimension table for Electric Vehicles"
+    columns:
+      - name: vehicle_id
+        description: "business key in dimension table"
+        tests:
+          - unique
+          - not_null
+      - name: vehicle_vin11
+        description: "11 digit vin number of vehicle"
+      - name: vehicle_nz_registration_year
+        description: "Year when the vehicle was registered in New Zealand"
+        tests:
+          - not_null
+      - name: vehicle_nz_registration_month
+        description: "Month in a year when the vehicle was registered in New Zealand"
+        tests:
+          - not_null
+  - name: dim_date
+    description: "Standard Date Dimension table"
+    columns:
+      - name: d_date
+        description: "business key in date dimension table"
+      - name: d_year
+        description: "Year in date dimension table"

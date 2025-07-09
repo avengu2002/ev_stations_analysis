@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: raw
+    database: EV_STATIONS_ANALYTICS
+    schema: RAW
+    tables:
+      - name: motor_vehicle_register_raw
+        description: Raw vehicle register data ingested from csv

@@ -1,0 +1,53 @@
+version: 2
+
+snapshots:
+  - name: ev_charging_stations_snapshot
+    description: "SCD Type 2 snapshot of charging station data"
+    columns:
+      - name: charging_station_id
+        description: "Primary key for the charging station"
+        tests:
+          - not_null          
+      - name: station_name
+        description: "Station name"
+      - name: operator_name
+        description: "Name of the Station operator" 
+      - name: owner_name
+        description: "Name of the Station owner" 
+      - name: station_address
+        description: "Address of the Station"         
+      - name: is_24_hours_flag
+        description: "Flag to indicate oiff the station is open 24 hrs"  
+      - name: car_park_count
+        description: "Number of carparks available at the Station"         
+      - name: has_carpark_cost_flag
+        description: "Flag to indicate if the station charges for the parking"
+      - name: max_time_limit
+        description: "Maximum chraging time limit at the station per vehicle"                    
+      - name: dbt_valid_from
+        description: "When this record became valid"
+      - name: dbt_valid_to
+        description: "When this record stopped being valid"
+  - name: ev_charging_stations_connectors_snapshot
+    description: "SCD Type 2 snapshot of charging connectors data"  
+    columns:
+      - name: charging_station_id
+      - name: station_name
+      - name: operator_name
+      - name: owner_name
+      - name: station_address
+      - name: is_24_hours_flag
+      - name: car_park_count
+      - name: has_carpark_cost_flag
+      - name: max_time_limit
+      - name: has_tourist_attraction_flag
+      - name: latitude
+      - name: longitude
+      - name: date_first_operational
+      - name: station_status
+      - name: has_charging_cost_flag
+      - name: connector_type
+      - name: connector_power
+      - name: connector_stand
+      - name: connector_status
+      - name: connector_count    

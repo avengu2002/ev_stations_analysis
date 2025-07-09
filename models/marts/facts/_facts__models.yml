@@ -1,0 +1,15 @@
+version: 2
+
+models:
+  - name: fact_ev_registration_metrics
+    description: "Fact table tracking yearly EV registration counts by region, vehicle type, make, and model."
+    columns:
+      - name: fk_vehicle_key
+        tests:
+          - unique
+          - not_null
+      - name: fk_vehicle_reg_date_key
+        tests:
+          - not_null          
+      - name: vehicle_count
+
