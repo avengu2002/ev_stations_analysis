@@ -17,7 +17,7 @@ models:
       - name: vechicle_is_ev_flag
       - name: registration_count
 
-  - name: ev_vehicle_dashboard
+  - name: ev_kpis
     description: "Reporting view based on ev_vehicle_dashboard"
     columns:
       - name: vehicle_nz_registration_date 

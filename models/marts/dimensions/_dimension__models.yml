@@ -30,6 +30,7 @@ models:
           - unique
           - not_null
       - name: connector_type
+        description: "{{ doc('dimension_connector_type') }}"      
       - name: connector_stand
       - name: connector_power
       - name: connector_status

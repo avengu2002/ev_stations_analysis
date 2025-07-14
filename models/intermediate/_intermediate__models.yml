@@ -51,6 +51,10 @@ models:
       - name: distance_km
         tests:
           - not_null
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+              max_value: 100
+              strictly: false        
 
   - name: int_ev_charging_stations__connectors
     description: "Intermediate view to flatten connectior array in raw charging station json file"  
