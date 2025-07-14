@@ -1,3 +1,5 @@
+-- models/intermediate/int_ev_charging_stations__nearest_stations.sql
+
 {{ config(materialized='table') }}
 
 WITH ranked_distances AS (

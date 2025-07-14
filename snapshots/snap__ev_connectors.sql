@@ -1,4 +1,7 @@
-{% snapshot snap_ev_connectors %}
+-- snapshots/snap__ev_connectors.sql
+
+
+{% snapshot snap__ev_connectors %}
 
 {{
   config(

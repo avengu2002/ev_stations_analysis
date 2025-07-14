@@ -1,3 +1,6 @@
+-- models/marts/facts/fact_ev_registration_metrics.sql
+
+
 {{ config(
     materialized='incremental',
     unique_key='vehicle_id',

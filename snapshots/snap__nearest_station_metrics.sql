@@ -1,3 +1,6 @@
+-- snapshots/snap__nearest_station_metrics.sql
+
+
 {% snapshot snap__nearest_station_metrics %}
 {{
     config(

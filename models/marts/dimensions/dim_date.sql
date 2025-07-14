@@ -1,3 +1,4 @@
+-- models/marts/dimensions/dim_date.sql
 {{ 
     config(
             materialized="table", 

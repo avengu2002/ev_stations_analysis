@@ -1,3 +1,6 @@
+-- models/intermediate/int_mv_register__ev_registrations.sql
+
+
 {{ config(materialized='table') }}
 
 WITH eletric_vehicles AS (

@@ -2,10 +2,66 @@ version: 2
 
 models:
   - name: int_mv_register__ev_registrations
+    description: "Intermediate table for registered Electric Vehicles to derive vechicle_is_ev_flag"
+    columns:
+      - name: vehicle_id
+        tests:
+          - unique
+          - not_null          
+      - name: vehicle_vin11
+      - name: vehicle_class
+      - name: vehicle_make
+      - name: vehicle_model
+      - name: vehicle_colour
+      - name: vehicle_type
+      - name: vehicle_year
+      - name: vehicle_nz_registration_year
+      - name: vehicle_nz_registration_month
+      - name: vehicle_nz_registration_year_month_date
+      - name: vehicle_region
+      - name: vehicle_synthetic_greenhouse_gas    
+      - name: vehicle_motive_power
+      - name: vechicle_is_ev_flag
+        tests:                                                                                  
+         - accepted_values:
+            values: ['TRUE', 'FALSE']
  
   - name: int_ev_charging_stations__distances
-  
+    description: "Intermediate ephemeral table to calculate distance between stations using haversine_distance macro"  
+    columns:
+      - name: station_a   
+      - name: station_name_a
+      - name: station_b
+      - name: station_name_b
+      - name: distance_km
+
   - name: int_ev_charging_stations__nearest_stations
-        
+    description: "Intermediate ephemeral table to derive nearest station using int_ev_charging_stations__distances"  
+    columns:
+      - name: station_id   
+        tests:
+          - unique
+          - not_null      
+      - name: station_name
+      - name: nearest_station_id
+        tests:
+          - unique
+          - not_null       
+      - name: nearest_station_name
+      - name: distance_km
+        tests:
+          - not_null
+
   - name: int_ev_charging_stations__connectors
- 
+    description: "Intermediate view to flatten connectior array in raw charging station json file"  
+    columns:
+      - name: station_id   
+      - name: connector_details
+      - name: connector_type
+      - name: connector_power
+      - name: connector_stand
+      - name: connector_status
+      - name: connector_count
+        tests:
+          - not_zero      
+

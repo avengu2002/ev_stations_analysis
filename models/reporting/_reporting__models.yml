@@ -1,0 +1,27 @@
+version: 2
+
+models:
+  - name: ev_vehicle_dashboard
+    description: "Reporting view based on fact_ev_registration_metrics"
+    columns:
+      - name: fk_vehicle_key   
+      - name: fk_vehicle_reg_date_key
+      - name: vehicle_nz_registration_date 
+      - name: vehicle_nz_registration_year     
+      - name: vehicle_class
+      - name: vehicle_make  
+      - name: vehicle_model      
+      - name: vehicle_type
+      - name: vehicle_vin11
+      - name: vehicle_region      
+      - name: vechicle_is_ev_flag
+      - name: registration_count
+
+  - name: ev_vehicle_dashboard
+    description: "Reporting view based on ev_vehicle_dashboard"
+    columns:
+      - name: vehicle_nz_registration_date 
+      - name: vehicle_nz_registration_year     
+      - name: vehicle_region      
+      - name: vehicle_type
+      - name: total_ev_registrations

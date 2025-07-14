@@ -1,3 +1,6 @@
+-- snapshots/snap__ev_charging_stations.sql
+
+
 {% snapshot snap__ev_charging_stations %}
 {{
     config(

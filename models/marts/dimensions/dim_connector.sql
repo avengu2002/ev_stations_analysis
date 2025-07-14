@@ -1,4 +1,4 @@
--- models/dim_connector.sql
+-- models/marts/dimensions/dim_connector.sql
 
 {{ config(
     materialized = 'table',
@@ -12,7 +12,7 @@ with source_data as (
         connector_stand,
         connector_power,
         connector_status
-    from {{ ref('snap_ev_connectors') }}
+    from {{ ref('snap__ev_connectors') }}
 ),
 
 with_surrogate_key as (

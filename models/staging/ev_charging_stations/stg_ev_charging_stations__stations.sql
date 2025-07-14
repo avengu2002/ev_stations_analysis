@@ -1,3 +1,6 @@
+-- models/staging/ev_charging_stations/stg_ev_charging_stations__stations.sql
+
+
 {{ config(
     materialized='view'
 ) }}

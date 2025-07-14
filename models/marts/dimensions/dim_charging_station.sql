@@ -1,3 +1,5 @@
+-- models/marts/dimensions/dim_charging_station.sql
+
 {{ 
     config(
             materialized="table", 

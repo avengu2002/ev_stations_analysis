@@ -1,3 +1,5 @@
+-- models/intermediate/int_ev_charging_stations__connectors.sql
+
 {{ config(materialized='view') }}
 WITH split_data 
 AS (

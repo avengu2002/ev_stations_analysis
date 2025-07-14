@@ -1,3 +1,6 @@
+-- models/staging/mv_register/stg_mv_register__registrations.sql
+
+
 {{ config(
     materialized='table',
     QUERY_TAG = "ev_analytics"

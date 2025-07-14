@@ -4,6 +4,7 @@ models:
     columns:
       - name: vehicle_id
         tests:
+          - unique
           - not_null
       - name: vehicle_alternative_motive_power
       - name: vehicle_colour

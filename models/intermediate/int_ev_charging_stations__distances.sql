@@ -1,3 +1,5 @@
+-- models/intermediate/int_ev_charging_stations__distances.sql
+
 {{ config(materialized='ephemeral') }}
 
 WITH base AS (

@@ -1,7 +1,7 @@
 version: 2
 
 snapshots:
-  - name: ev_charging_stations_snapshot
+  - name: snap__ev_charging_stations
     description: "SCD Type 2 snapshot of charging station data"
     columns:
       - name: charging_station_id
@@ -28,10 +28,13 @@ snapshots:
         description: "When this record became valid"
       - name: dbt_valid_to
         description: "When this record stopped being valid"
-  - name: ev_charging_stations_connectors_snapshot
+
+  - name: snap__ev_connectors
     description: "SCD Type 2 snapshot of charging connectors data"  
     columns:
-      - name: charging_station_id
+      - name: station_id
+        tests:
+          - not_null
       - name: station_name
       - name: operator_name
       - name: owner_name
@@ -50,4 +53,13 @@ snapshots:
       - name: connector_power
       - name: connector_stand
       - name: connector_status
-      - name: connector_count    
+      - name: connector_count   
+
+  - name: snap__nearest_station_metrics
+    description: "SCD Type 2 snapshot of nearest station metrics data"  
+    columns:
+      - name: station_id
+        tests:
+          - not_null      
+      - name: nearest_station_id
+      - name: distance_km

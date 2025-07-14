@@ -1,4 +1,4 @@
--- models/fact_charging_station_metrics.sql
+-- models/marts/facts/fact_charging_station_metrics.sql
 
 {{ config(
     materialized = 'table',
@@ -16,7 +16,7 @@ with connector_snapshot as (
         connector_count,
         dbt_valid_from,
         dbt_valid_to
-    from {{ ref('snap_ev_connectors') }}
+    from {{ ref('snap__ev_connectors') }}
 
 ),
 

@@ -1,3 +1,5 @@
+-- models/reporting/ev_kpis.sql
+
 
 {{ config(materialized='view', schema='marts') }}
 SELECT

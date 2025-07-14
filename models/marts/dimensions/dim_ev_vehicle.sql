@@ -1,3 +1,4 @@
+-- models/marts/dimensions/dim_ev_vehicle.sql
 {{ 
     config(
             materialized="table", 
