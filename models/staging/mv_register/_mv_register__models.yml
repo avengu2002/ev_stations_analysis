@@ -1,0 +1,49 @@
+models:
+  - name: stg_mv_register__registrations
+    description: "Staging model for vehicle register data"
+    columns:
+      - name: vehicle_id
+        tests:
+          - not_null
+      - name: vehicle_alternative_motive_power
+      - name: vehicle_colour
+      - name: vehicle_body_type
+      - name: vehicle_cc_rating
+      - name: vehicle_chassis7
+      - name: vehicle_class
+      - name: vehicle_engine_number
+      - name: vehicle_nz_registration_year
+      - name: vehicle_nz_registration_month
+      - name: vehicle_nz_registration_year_month_date
+      - name: vehicle_gross_mass
+      - name: vehicle_height
+      - name: vehicle_import_status
+      - name: vehicle_industry_class
+      - name: vehicle_industry_model_code
+      - name: vehicle_make
+      - name: vehicle_model
+      - name: vehicle_motive_power
+      - name: vehicle_mvma_model_code
+      - name: vehicle_number_of_axles
+      - name: vehicle_number_of_seats
+      - name: vehicle_nz_assembled
+      - name: vehicle_original_country
+      - name: vehicle_power_rating
+      - name: vehicle_previous_country
+      - name: vehicle_road_transport_code
+      - name: vehicle_submodel
+      - name: vehicle_region
+      - name: vehicle_transmission_type
+      - name: vehicle_vdam_weight
+      - name: vehicle_type
+      - name: vehicle_usage
+      - name: vehicle_year
+      - name: vehicle_vin11
+      - name: vehicle_width
+      - name: vehicle_synthetic_greenhouse_gas
+      - name: vehicle_fc_combined
+      - name: vehicle_fc_urban
+      - name: vehicle_fc_extra_urban
+      - name: file_name
+      - name: load_timestamp
+      - name: processed_at

@@ -38,8 +38,6 @@ select
         vehicle_colour,
 	    vehicle_type,
         vehicle_year,        
-        vehicle_nz_registration_year,
-        vehicle_nz_registration_month,
         vehicle_region,
         vehicle_synthetic_greenhouse_gas,
         vehicle_motive_power,

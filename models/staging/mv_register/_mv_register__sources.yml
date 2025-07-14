@@ -7,3 +7,51 @@ sources:
     tables:
       - name: motor_vehicle_register_raw
         description: Raw vehicle register data ingested from csv
+        loaded_at_field: load_timestamp
+
+        freshness:
+          warn_after: {count: 7, period: day}
+          error_after: {count: 14, period: day}
+
+        columns:
+          - name: objectid
+            tests:
+                - not_null
+          - name: alternative_motive_power
+          - name: basic_colour
+          - name: body_type
+          - name: cc_rating
+          - name: chassis7
+          - name: class
+          - name: engine_number
+          - name: first_nz_registration_year
+          - name: gross_vehicle_mass
+          - name: height
+          - name: import_status
+          - name: industry_class
+          - name: industry_model_code
+          - name: make
+          - name: model
+          - name: motive_power
+          - name: mvma_model_code
+          - name: number_of_axles
+          - name: number_of_seats
+          - name: nz_assembled
+          - name: original_country
+          - name: power_rating
+          - name: previous_country
+          - name: road_transport_code
+          - name: submodel
+          - name: tla
+          - name: transmission_type
+          - name: vdam_weight
+          - name: vehicle_type
+          - name: vehicle_usage
+          - name: vehicle_year
+          - name: vin11
+          - name: width
+          - name: synthetic_greenhouse_gas
+          - name: fc_combined
+          - name: fc_urban
+          - name: fc_extra_urban
+          - name: loaded_timestamp

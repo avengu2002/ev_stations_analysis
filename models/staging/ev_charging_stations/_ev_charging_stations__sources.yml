@@ -7,3 +7,17 @@ sources:
     tables:
       - name: ev_roam_charging_stations_raw
         description: Raw ev station data from json file
+        loaded_at_field: load_timestamp
+
+        freshness:
+          warn_after: {count: 7, period: day}
+          error_after: {count: 14, period: day}
+
+        columns:
+          - name: raw_data
+            tests:
+              - not_null
+              
+          - name: file_name
+            tests:
+              - not_null

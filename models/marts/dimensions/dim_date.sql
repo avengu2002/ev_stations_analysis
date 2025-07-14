@@ -13,7 +13,8 @@ with base_dates as (
     ) }}
 )
 select
-    {{ dbt_utils.generate_surrogate_key(['date_day']) }} as SK_DATE,
+--    {{ dbt_utils.generate_surrogate_key(['date_day']) }} as SK_DATE,
+    CAST(TO_CHAR(date_day, 'YYYYMMDD') AS INTEGER) as SK_DATE,
     date_day as d_date,
     year(date_day) as d_year,
     month(date_day) as d_month,

@@ -8,17 +8,11 @@ models:
         description: "business key in dimension table"
         tests:
           - unique
-          - not_null
+          - not_null          
       - name: vehicle_vin11
         description: "11 digit vin number of vehicle"
-      - name: vehicle_nz_registration_year
-        description: "Year when the vehicle was registered in New Zealand"
-        tests:
-          - not_null
-      - name: vehicle_nz_registration_month
-        description: "Month in a year when the vehicle was registered in New Zealand"
-        tests:
-          - not_null
+
+
   - name: dim_date
     description: "Standard Date Dimension table"
     columns:
@@ -26,3 +20,37 @@ models:
         description: "business key in date dimension table"
       - name: d_year
         description: "Year in date dimension table"
+
+  - name: dim_connector
+    description: "Dimension table for unique connector configurations."
+    columns:
+      - name: sk_connector_key
+        description: "Surrogate key for connector configuration"
+        tests:
+          - unique
+          - not_null
+      - name: connector_type
+      - name: connector_stand
+      - name: connector_power
+      - name: connector_status
+
+  - name: dim_charging_station
+    description: "Dimension table for EV CHarging Stations"
+    columns:
+      - name: sk_charging_station_key
+        description: "surrogate key in dimension table"
+        tests:
+          - unique
+          - not_null    
+      - name: charging_station_id
+        description: "business key in dimension table"
+        tests:
+          - not_null  
+      - name: station_status
+        description: "Status of the charging station if it is operational or not"
+        tests:
+          - not_null
+      - name: date_first_operational
+        description: " Date on which the charging station came into operation"
+        tests:
+          - not_null              

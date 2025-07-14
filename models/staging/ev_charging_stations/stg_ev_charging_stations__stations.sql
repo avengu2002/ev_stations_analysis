@@ -11,7 +11,7 @@ WITH source_data AS (
 
 parsed_data AS (
     SELECT
-        raw:"OBJECTID"::STRING AS charging_station_id,
+        raw:"OBJECTID"::NUMBER AS charging_station_id,
         raw:"NAME"::STRING AS station_name,
         raw:"OPERATOR"::STRING AS operator_name,
         raw:"OWNER"::STRING AS owner_name,

@@ -32,16 +32,17 @@ final as (
         src.vehicle_fc_combined,
         src.vehicle_fc_urban,
         src.vehicle_fc_extra_urban,
+        src.load_timestamp,
         1 as vehicle_count
 from source src 
-left join dim_vehicle v 
+join dim_vehicle v 
 on src.vehicle_id = v.vehicle_id
-left join dim_date d
+join dim_date d
 on src.vehicle_nz_registration_year_month_date = d.d_date
 where 
     src.vehicle_nz_registration_year_month_date is not null
 )
 Select * from final
 {% if is_incremental() %}
-    where vehicle_id not in (select vehicle_id from {{ this }})
+    where load_timestamp not in (select MAX(load_timestamp) from {{ this }})
 {% endif %}

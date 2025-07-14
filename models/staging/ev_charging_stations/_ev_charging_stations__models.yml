@@ -12,13 +12,30 @@ models:
       - name: owner_name
       - name: station_address
       - name: is_24_hours_flag
+        tests:
+          - accepted_values:
+              values: ['TRUE', 'FALSE']
       - name: car_park_count
       - name: has_carpark_cost_flag
       - name: max_time_limit
       - name: has_tourist_attraction_flag
+        tests:
+          - accepted_values:
+              values: ['TRUE', 'FALSE']      
       - name: latitude
+        tests:
+          - not_null      
       - name: longitude
+        tests:
+          - not_null      
       - name: date_first_operational
       - name: station_status
       - name: connectors_json
       - name: has_charging_cost_flag
+        tests:
+          - accepted_values:
+              values: ['TRUE', 'FALSE']      
+      - name: global_id
+      - name: file_name
+      - name: load_time_stamp
+      

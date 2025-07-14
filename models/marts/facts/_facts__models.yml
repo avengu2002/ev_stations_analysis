@@ -5,11 +5,66 @@ models:
     description: "Fact table tracking yearly EV registration counts by region, vehicle type, make, and model."
     columns:
       - name: fk_vehicle_key
+        description: "Foreign key for vehicle surrogate key in the fact table"
         tests:
           - unique
           - not_null
+          - relationships:
+              to: ref('dim_ev_vehicle')   # the referenced model
+              field: sk_vehicle_key       # the column to match against
       - name: fk_vehicle_reg_date_key
+        description: "Foreign key for first operational date in the fact table"
         tests:
-          - not_null          
+          - not_null
+          - relationships:
+              to: ref('dim_date')   # the referenced model
+              field: sk_date       # the column to match against        
       - name: vehicle_count
 
+  - name: fact_charging_station_metrics
+    description: "Fact table tracking yearly EV registration counts by region, vehicle type, make, and model."
+    columns:
+      - name: fk_charging_station_key
+        description: "Foreign key for station surrogate key in the fact table"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_charging_station')   # the referenced model
+              field: sk_charging_station_key    # the column to match against
+      - name: fk_nearest_charging_station_key
+        description: "Foreign key for nearest station surrogate key in the fact table"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_charging_station')   # the referenced model
+              field: sk_charging_station_key    # the column to match against
+      - name: fk_date_first_operational
+        description: "Foreign key for nearest station surrogate key in the fact table"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_date')   # the referenced model
+              field: sk_date    # the column to match against              
+      - name: is_current_flag
+        description: "Indicates if the record is current in the temporal fact table"
+        tests:
+          - accepted_values:
+              values: ['TRUE', 'FALSE']  
+
+  - name: fact_charging_station_connectors_metrics
+    description: "Fact table tracking connector details by charging stations"
+    columns:
+      - name: fk_connector_key
+        description: "Foreign key for vehicle surrogate key in the fact table"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_connector')   # the referenced model
+              field: sk_connector_key       # the column to match against
+      - name: fk_valid_from_date
+        description: "Foreign key for valid from date in the fact table"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_date')   # the referenced model
+              field: sk_date       # the column to match against        

@@ -37,6 +37,9 @@ clean-targets:         # directories to be removed by `dbt clean`
 
 models:
   my_new_project:
+    +pre-hook:
+      - "{{ set_custom_query_tag() }}"
+
     staging:
       +materialized: view
       +schema: staging
@@ -47,4 +50,6 @@ models:
       dimensions:
         +materialized: table     
         +schema: marts
-
+        +pre-hook:
+        - |
+          {{ "SET QUERY_TAG = 'model=" ~ this.name ~ ", env=" ~ target.name ~ "'" }}

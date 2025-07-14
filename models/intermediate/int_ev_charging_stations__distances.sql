@@ -20,20 +20,7 @@ distances AS (
         station_name_a,
         station_b,
         station_name_b,
-        6371 * 2 * ATAN2(
-            SQRT(
-                SIN(RADIANS(lat_b - lat_a) / 2) * SIN(RADIANS(lat_b - lat_a) / 2) +
-                COS(RADIANS(lat_a)) * COS(RADIANS(lat_b)) *
-                SIN(RADIANS(lon_b - lon_a) / 2) * SIN(RADIANS(lon_b - lon_a) / 2)
-            ),
-            SQRT(
-                1 - (
-                    SIN(RADIANS(lat_b - lat_a) / 2) * SIN(RADIANS(lat_b - lat_a) / 2) +
-                    COS(RADIANS(lat_a)) * COS(RADIANS(lat_b)) *
-                    SIN(RADIANS(lon_b - lon_a) / 2) * SIN(RADIANS(lon_b - lon_a) / 2)
-                )
-            )
-        ) AS distance_km
+        {{ haversine_distance('lat_a','lon_a','lat_b','lon_b') }} AS distance_km
     FROM base
 )
 

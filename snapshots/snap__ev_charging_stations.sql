@@ -1,5 +1,4 @@
-{% snapshot ev_charging_stations_snapshot %}
-
+{% snapshot snap__ev_charging_stations %}
 {{
     config(
         unique_key='CHARGING_STATION_ID',
@@ -11,7 +10,7 @@
 }}
 
 select 
-    {{ dbt_utils.generate_surrogate_key(['s.CHARGING_STATION_ID']) }} as sk_charging_station_key,
+    -- {{ dbt_utils.generate_surrogate_key(['s.CHARGING_STATION_ID']) }} as sk_charging_station_key,
         s.charging_station_id as charging_station_id,
         s.station_name as station_name,
         s.operator_name as operator_name,
@@ -34,5 +33,4 @@ select
         {{ ref('seed_charging_stations_with_regions')}} r
     on
         r.charging_station_id = s.charging_station_id
-
 {% endsnapshot %}

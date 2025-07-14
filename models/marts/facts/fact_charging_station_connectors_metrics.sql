@@ -1,36 +1,85 @@
+-- models/fact_charging_station_metrics.sql
+
 {{ config(
-    materialized='incremental',
-    unique_key='fk_connector_key',
-    schema='marts',
-    on_schema_change='sync_all_columns',
-    post_hook = [ 
-        """
-            INSERT INTO EV_STATIONS_ANALYTICS.STAGING.INCREMENTAL_RUN_AUDIT 
-            SELECT '{{ this.name }}' AS model_name, 
-            CURRENT_TIMESTAMP AS run_time, 
-            COUNT(*) AS row_count
-            FROM {{ this }} 
-        """
-    ]    
+    materialized = 'table',
+    schema='marts'
 ) }}
 
-with stg_stations as (
-    select * from {{ ref('stg_ev_charging_stations__stations') }}
+with connector_snapshot as (
+
+    select
+        station_id as charging_station_id,
+        connector_type,
+        connector_stand,
+        connector_power,
+        connector_status,
+        connector_count,
+        dbt_valid_from,
+        dbt_valid_to
+    from {{ ref('snap_ev_connectors') }}
+
 ),
 
 dim_connector as (
-    select * from {{ ref('dim_charging_connector') }}
+
+    select *
+    from {{ ref('dim_connector') }}
+
 ),
-fact as (
+
+connector_with_key as (
+
     select
-        c.sk_connector_key as fk_connector_key,
-        c.charging_station_id as charging_station_id,
-        c.connector_count as connector_count
-   from dim_connector c
-    left join stg_stations s on c.charging_station_id = s.charging_station_id
-    where c.DBT_VALID_TO is null
+        cs.charging_station_id,
+        dc.sk_connector_key,
+        cs.connector_count,
+        cs.dbt_valid_from,
+        cs.dbt_valid_to
+    from connector_snapshot cs
+    join dim_connector dc
+    on cs.connector_type = dc.connector_type
+     and cs.connector_stand = dc.connector_stand
+     and cs.connector_power = dc.connector_power
+     and cs.connector_status = dc.connector_status
+
+),
+
+aggregated_fact as (
+
+    select
+        sk_connector_key as fk_connector_key,
+        charging_station_id,
+        to_date(dbt_valid_from) as valid_from,
+        to_date(dbt_valid_to) as valid_to,
+        SUM(connector_count) as total_connector_count
+    from connector_with_key
+    group by 1, 2, 3, 4
+
+),
+
+add_date_key as (
+
+    select
+        fk_connector_key,
+        charging_station_id,
+        valid_from,
+        valid_to,
+        total_connector_count,
+        dd.SK_DATE as fk_valid_from_date,
+        dd2.SK_DATE as fk_valid_to_date
+    from aggregated_fact af
+    left join {{ ref('dim_date') }} dd
+      on dd.d_date = af.valid_from
+    left join {{ ref('dim_date') }} dd2
+      on dd2.d_date= af.valid_to
 )
-select * from fact
-{% if is_incremental() %}
-    where fk_connector_key not in (select fk_connector_key from {{ this }})
-{% endif %}
+
+select 
+    fk_connector_key,
+    charging_station_id,
+    valid_from,
+    valid_to,
+    total_connector_count,
+    fk_valid_from_date,
+    fk_valid_to_date
+from add_date_key

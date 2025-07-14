@@ -1,4 +1,4 @@
-{{ config(materialized='ephemeral') }}
+{{ config(materialized='table') }}
 
 WITH eletric_vehicles AS (
     SELECT
@@ -26,8 +26,8 @@ WITH eletric_vehicles AS (
             ELSE FALSE
         END AS vechicle_is_ev_flag     
     FROM {{ ref('stg_mv_register__registrations') }}
-        where 
-        vehicle_nz_registration_year_month_date is not null
+    WHERE 
+        vehicle_nz_registration_year IS NOT NULL AND vehicle_nz_registration_month IS NOT NULL
 )
 Select * from eletric_vehicles    
 

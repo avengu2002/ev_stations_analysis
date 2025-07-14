@@ -1,5 +1,6 @@
 {{ config(
-    materialized='view'
+    materialized='table',
+    QUERY_TAG = "ev_analytics"
 ) }}
 WITH source_data AS (
     SELECT * FROM {{ source('raw', 'motor_vehicle_register_raw') }}
@@ -46,9 +47,15 @@ SELECT
 	cast(fc_combined as numeric(5,2)) AS vehicle_fc_combined,
 	cast(fc_urban as numeric(5,2)) AS vehicle_fc_urban,
 	cast(fc_extra_urban as numeric(5,2)) AS vehicle_fc_extra_urban,
-    'Motor_Vehicle_Register_API_dt' AS file_name,
-    null AS load_timestamp,
-    CURRENT_TIMESTAMP() AS processed_at
+    load_timestamp,
 from source_data
+),
+
+deduplicated_data AS (
+    SELECT
+        *,
+        ROW_NUMBER() OVER (PARTITION BY vehicle_id ORDER BY load_timestamp DESC) AS row_num
+    FROM renamed
 )
-select * from renamed
+select * from deduplicated_data
+where row_num = 1

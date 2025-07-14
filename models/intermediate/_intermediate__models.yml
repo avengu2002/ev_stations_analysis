@@ -1,0 +1,11 @@
+version: 2
+
+models:
+  - name: int_mv_register__ev_registrations
+ 
+  - name: int_ev_charging_stations__distances
+  
+  - name: int_ev_charging_stations__nearest_stations
+        
+  - name: int_ev_charging_stations__connectors
+ 

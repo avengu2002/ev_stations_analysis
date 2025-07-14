@@ -3,7 +3,7 @@
 WITH ranked_distances AS (
     SELECT
         *,
-        ROW_NUMBER() OVER (PARTITION BY station_a ORDER BY distance_km ASC) AS distance_rank
+        ROW_NUMBER() OVER (PARTITION BY station_a ORDER BY distance_km ASC, station_b ASC) AS distance_rank
     FROM {{ ref('int_ev_charging_stations__distances') }}
 )
 

@@ -5,7 +5,7 @@
 ) 
 }}
 select 
-        sk_charging_station_key,
+        dbt_scd_id as sk_charging_station_key,
         charging_station_id,
         station_name,
         operator_name,
@@ -23,8 +23,12 @@ select
         has_charging_cost_flag , 
         global_id,
         region,
-        dbt_valid_from,
-        dbt_valid_to,
+        dbt_valid_from as valid_from,
+        dbt_valid_to as valid_to,
+        CASE
+            WHEN dbt_valid_to IS NULL THEN TRUE
+            ELSE FALSE
+        END AS is_current_flag,
         dbt_updated_at
 from    
-    {{ ref('ev_charging_stations_snapshot') }}        
+    {{ ref('snap__ev_charging_stations') }}        

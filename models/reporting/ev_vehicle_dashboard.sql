@@ -5,8 +5,8 @@
 SELECT
     f.fk_vehicle_key,
     fk_vehicle_reg_date_key,
-    dv.vehicle_nz_registration_year,
     d_date as vehicle_nz_registration_date,
+    YEAR(d_date) as vehicle_nz_registration_year,
     dv.vehicle_class,
     dv.vehicle_make,
     dv.vehicle_model,
