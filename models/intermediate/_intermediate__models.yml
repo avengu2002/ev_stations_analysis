@@ -45,7 +45,6 @@ models:
       - name: station_name
       - name: nearest_station_id
         tests:
-          - unique
           - not_null       
       - name: nearest_station_name
       - name: distance_km

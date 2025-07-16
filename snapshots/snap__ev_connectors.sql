@@ -20,6 +20,7 @@
 
 select
     station_id,
+    date_first_operational,
     connector_type,
     connector_stand,
     connector_power,

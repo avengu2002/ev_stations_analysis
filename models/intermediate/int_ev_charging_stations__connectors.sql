@@ -5,6 +5,7 @@ WITH split_data
 AS (
 SELECT
     charging_station_id,
+    date_first_operational,
     SPLIT(connectors_raw, '},{') AS connector_array
 FROM 
     {{ ref('stg_ev_charging_stations__stations') }}
@@ -13,6 +14,7 @@ flattened AS
 (
     SELECT
         charging_station_id,
+        date_first_operational,
         TRIM(connector.value) AS connector_details
     FROM 
         split_data,
@@ -20,6 +22,7 @@ flattened AS
 )
 Select 
     charging_station_id AS station_id,
+    date_first_operational,
     connector_details,
     -- Extract Type: first field
     TRIM(REGEXP_SUBSTR(connector_details, '^[^,]+')) AS connector_type,

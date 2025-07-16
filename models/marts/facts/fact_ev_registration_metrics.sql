@@ -4,7 +4,16 @@
 {{ config(
     materialized='incremental',
     unique_key='vehicle_id',
-    schema='marts'
+    schema='marts',
+    post_hook = [ 
+        """
+            INSERT INTO EV_STATIONS_ANALYTICS.AUDIT_SCHEMA.INCREMENTAL_RUN_AUDIT 
+            SELECT '{{ this.name }}' AS model_name, 
+            CURRENT_TIMESTAMP AS run_time, 
+            COUNT(*) AS row_count
+            FROM {{ this }} 
+        """
+    ]      
 ) }}
 
 with source as (
