@@ -1,7 +1,9 @@
+-- models/marts/facts/fact_charging_station_metrics.sql
 {{ 
 config(
     materialized="table", 
     schema='marts'
+    
 ) }}
 
 with nearest_stations as (

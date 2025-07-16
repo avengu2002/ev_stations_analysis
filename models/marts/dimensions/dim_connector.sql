@@ -3,6 +3,7 @@
 {{ config(
     materialized = 'table',
     schema='marts'
+    
 ) }}
 
 with source_data as (

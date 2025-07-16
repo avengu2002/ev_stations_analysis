@@ -2,7 +2,10 @@
 {{ 
     config(
             materialized="table", 
-            schema='marts'
+            schema='marts',
+                post_hook=[
+                    "ALTER TABLE {{ this }} ADD CONSTRAINT pk_dim_date PRIMARY KEY (d_date)"
+                ]
 ) 
 }}
 

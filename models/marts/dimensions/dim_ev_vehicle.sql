@@ -3,7 +3,11 @@
     config(
             materialized="table", 
             schema='marts',
-            post_hook = "ALTER TABLE {{ this }} MODIFY COLUMN vehicle_vin11 SET TAG EV_STATIONS_ANALYTICS.MARTS.SENSITIVE_TAG = 'TRUE';"
+            post_hook = [
+                "ALTER TABLE {{ this }} MODIFY COLUMN vehicle_vin11 SET TAG EV_STATIONS_ANALYTICS.MARTS.SENSITIVE_TAG = 'TRUE';"
+                "ALTER TABLE {{ this }} ADD CONSTRAINT uq_dim_ev_vehicle_id UNIQUE (vehicle_id)"
+    ]
+
 ) 
 }}
 with stg_vehicle as (

@@ -1,4 +1,4 @@
--- models/marts/facts/fact_charging_station_metrics.sql
+-- models/marts/facts/fact_charging_station_connectors_metrics.sql
 
 {{ config(
     materialized = 'table',
